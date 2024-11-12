@@ -1,0 +1,23 @@
+body {
+    color: #e0e0e0;
+    background-color: #121212;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header {
+    font-size: 2rem;
+    font-weight: 100;
+    font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Cantarell, Ubuntu, roboto, noto, arial, sans-serif;
+    padding: 1rem;
+}
+
+.timer {
+    font-size: 10rem;
+    font-weight: bolder;
+    display: flex;
+    align-items: center;
+    height: 70svh;
+    
+}
