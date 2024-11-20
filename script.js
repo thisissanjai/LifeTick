@@ -1,12 +1,127 @@
-setInterval(function() {
-    var date = new Date();
-    var hour = date.getHours();
-    var min = date.getMinutes();
-    var sec = date.getSeconds();
-    if (hour >= 6 && hour < 23) {
-        document.querySelector(".timer").innerHTML = `${23 - hour}:${60 - min}:${60 - sec}`;
-    } else {
-        document.querySelector(".timer").innerHTML = `Sleep Time`;
-    }
+// Countdown Timer
+function countdownStart() {
+    const countdownElement = document.querySelector(".countdown");
 
-},1000); 
+    setInterval(() => {
+        const now = new Date();
+        const hour = now.getHours();
+        const minute = now.getMinutes();
+        const second = now.getSeconds();
+
+        if (hour >= 6 && hour < 23) {
+            const hoursLeft = 22 - hour;
+            const minutesLeft = 59 - minute;
+            const secondsLeft = 59 - second;
+
+            countdownElement.innerHTML = formatTime(hoursLeft, minutesLeft, secondsLeft);
+        } else {
+            countdownElement.innerHTML = "Sleep Time";
+        }
+    }, 1000); // Update every second
+}
+
+// Update Slider Value
+function trackTimerSlider() {
+    const slider = document.querySelector("#mm");
+    const display = document.querySelector(".minutes");
+
+    slider.addEventListener("input", function () {
+        display.innerHTML = this.value;
+    });
+}
+
+// Start Timer
+function startTimer() {
+    const startButton = document.querySelector(".start-timer");
+    const slider = document.querySelector("#mm");
+    const display = document.querySelector(".minutes");
+    const alarmInput = document.querySelector("#alarm");
+    const alertBox = document.querySelector(".alert");
+    const alertCloseButton = document.querySelector(".btn-close");
+
+    let activeTimerInterval = null;
+    let alarmSound = null; // To store the alarm sound
+
+    // Load the alarm sound when a file is selected
+    alarmInput.addEventListener("change", function () {
+        const file = alarmInput.files[0]; // Get the selected file
+        if (file) {
+            alarmSound = new Audio(URL.createObjectURL(file)); // Create an Audio object
+        }
+    });
+
+    alertCloseButton.addEventListener("click", function () {
+        alertBox.classList.remove("show");
+        if (alarmSound) {
+            alarmSound.pause();
+            alarmSound.currentTime = 0;
+        }
+    });
+
+    startButton.addEventListener("click", function () {
+        if (!activeTimerInterval) {
+            // Start the timer
+            this.innerHTML = "Stop Timer";
+            this.classList.add("active");
+
+            const now = new Date();
+            const targetTime = new Date(
+                now.getTime() + parseInt(slider.value) * 60 * 1000
+            );
+
+            if (slider.value > 0) {
+                display.innerHTML = `${slider.value - 1}:59`;
+            }
+
+            activeTimerInterval = setInterval(() => {
+                const remainingTime = targetTime - new Date();
+
+                if (remainingTime <= 0) {
+                    // Timer complete
+                    alertBox.classList.add("show");
+
+                    if (alarmSound) {
+                        alarmSound.play();
+                        alarmSound.loop = true;
+                    }
+
+                    clearInterval(activeTimerInterval);
+                    activeTimerInterval = null;
+                    resetTimerUI(this, slider, display);
+                    return;
+                }
+
+                // Update display
+                const minutes = Math.floor(remainingTime / 60000);
+                const seconds = Math.floor((remainingTime % 60000) / 1000);
+                slider.value = minutes;
+                console.log(minutes);
+
+                display.innerHTML = `${minutes}:${seconds.toString().padStart(2, "0")}`;
+            }, 1000);
+        } else {
+            // Stop the timer
+            clearInterval(activeTimerInterval);
+            activeTimerInterval = null;
+            resetTimerUI(this, slider, display);
+        }
+    });
+}
+
+// Reset Timer UI
+function resetTimerUI(button, slider, display) {
+    button.innerHTML = "Start Timer";
+    slider.value = 0;
+    display.innerHTML = "0";
+    button.classList.remove("active");
+}
+
+// Format Time Helper Function
+function formatTime(hours, minutes, seconds) {
+    return `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+}
+
+// Initialize All Functions
+countdownStart();
+trackTimerSlider();
+startTimer();
