@@ -35,20 +35,11 @@ function startTimer() {
     const startButton = document.querySelector(".start-timer");
     const slider = document.querySelector("#mm");
     const display = document.querySelector(".minutes");
-    const alarmInput = document.querySelector("#alarm");
     const alertBox = document.querySelector(".alert");
     const alertCloseButton = document.querySelector(".btn-close");
 
     let activeTimerInterval = null;
-    let alarmSound = null; // To store the alarm sound
-
-    // Load the alarm sound when a file is selected
-    alarmInput.addEventListener("change", function () {
-        const file = alarmInput.files[0]; // Get the selected file
-        if (file) {
-            alarmSound = new Audio(URL.createObjectURL(file)); // Create an Audio object
-        }
-    });
+    let alarmSound = new Audio("https://pub-f6308f0827f74ce4b354072b6280fb67.r2.dev/lifetick/1.mp3");
 
     alertCloseButton.addEventListener("click", function () {
         alertBox.classList.remove("show");
@@ -111,8 +102,8 @@ function startTimer() {
 // Reset Timer UI
 function resetTimerUI(button, slider, display) {
     button.innerHTML = "Start Timer";
-    slider.value = 0;
-    display.innerHTML = "0";
+    slider.value = 1;
+    display.innerHTML = "1";
     button.classList.remove("active");
 }
 

@@ -10,7 +10,7 @@ h1 {
 }
 
 main {
-    min-height: 80vh;
+    min-height: 60svh;
     align-items: center;
 }
 
@@ -18,7 +18,7 @@ main {
     font-size: 7rem;
     font-weight: bolder;
     font-family: initial !important;
-    padding-bottom: 10.5rem;
+    padding-bottom: 8rem;
 }
 
 .minutes-label {
@@ -26,13 +26,12 @@ main {
     font-family: initial !important;
 }
 
-.spinner {
-    font-size: 2rem;
-    margin: 2rem;
-    padding-top: 1rem;
+.timer {
+    width: 20rem;
 }
 
 .container {
+    padding-top: 5rem;
     width: 40vw;
     display: flex;
     flex-direction: column;
@@ -42,10 +41,12 @@ main {
 @media only screen and (max-width: 800px) {
     .container {
         width: 90vw;
+        margin-bottom: 2rem;
     }
 
     .countdown {
         font-size: 5rem;
+        padding-bottom: 0rem;
     }
 
     main {
