@@ -1,23 +1,82 @@
 body {
     color: #e0e0e0;
     background-color: #121212;
+    min-height: 100svh;
+    font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Cantarell, Ubuntu, roboto, noto, arial, sans-serif;
+}
+
+h1 {
+    font-weight: 100;
+}
+
+.countdown {
+    font-size: 7rem;
+    font-weight: bolder;
+    font-family: initial !important;
+}
+
+.minutes-label {
+    font-size: 3rem;
+    font-family: initial !important;
+}
+
+.spinner {
+    font-size: 2rem;
+    margin: 2rem;
+    padding-top: 1rem;
+}
+
+.container {
+    width: 42vw;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-header {
-    font-size: 2rem;
-    font-weight: 100;
-    font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Cantarell, Ubuntu, roboto, noto, arial, sans-serif;
-    padding: 1rem;
+@media only screen and (max-width: 800px) {
+    .container {
+        width: 90vw;
+    }
+
+    .countdown {
+        font-size: 5rem;
+    }
+
+    main {
+        flex-direction: column !important;
+    }
+
+    .spinner {
+        margin: 0.5rem;
+    }
 }
 
-.timer {
-    font-size: 10rem;
-    font-weight: bolder;
-    display: flex;
-    align-items: center;
-    height: 70svh;
-    
+@media only screen and (min-width: 800px) {
+    .container {
+        width: 50vw;
+    }
+
+    .countdown {
+        font-size: 6rem;
+    }
+
+    main {
+        flex-direction: row;
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    .container {
+        width: 45vw;
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    .container {
+        width: 43vw;
+    }
+
+    .countdown {
+        font-size: 7rem;
+    }
 }
