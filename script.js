@@ -8,8 +8,8 @@ function countdownStart() {
         const minute = now.getMinutes();
         const second = now.getSeconds();
 
-        if (hour >= 6 && hour < 23) {
-            const hoursLeft = 22 - hour;
+        if (hour >= 6 && hour < 22) {
+            const hoursLeft = 21 - hour;
             const minutesLeft = 59 - minute;
             const secondsLeft = 59 - second;
 
